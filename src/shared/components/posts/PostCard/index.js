@@ -15,6 +15,7 @@ const PostCard = ({ post }) => {
   const imagePath = `/images/posts/${slug}/${image}`;
   const linkPath = `/posts/${slug}`;
 
+  console.log("aqui", imagePath);
   return (
     <li className={classes.post}>
       <Link href={linkPath}>
