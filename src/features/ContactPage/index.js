@@ -1,9 +1,7 @@
-const HomePage = () => {
-  return (
-    <div>
-      <p>ContactPage</p>
-    </div>
-  );
+import ContactForm from "./ContactForm";
+
+const ContactPage = () => {
+  return <ContactForm />;
 };
 
-export default HomePage;
+export default ContactPage;
