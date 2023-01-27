@@ -1,32 +1,78 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./ContactForm.module.css";
+import Notification from "../../../shared/components/Notification";
 
 const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [requestStatus, setRequestStatus] = useState();
+  const [requestError, setRequestError] = useState();
 
-  const sendMessageHandler = (event) => {
+  const sendMessageHandler = async (event) => {
     event.preventDefault();
 
-    console.log(1, {
-      email,
-      name,
-      message,
-    });
-
-    fetch("/api/contact", {
-      method: "POST",
-      header: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        name: name,
-        message: message,
-      }),
-    });
+    setRequestStatus("pending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          name: name,
+          message: message,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong");
+      } else {
+        setRequestStatus("success");
+        setEmail("");
+        setName("");
+        setMessage("");
+      }
+    } catch (e) {
+      setRequestError(e.message);
+      setRequestStatus("error");
+    }
   };
+
+  let notification;
+
+  if (requestStatus === "pending") {
+    notification = {
+      status: "pending",
+      title: "Sending message...",
+      message: "Your message is on its way!",
+    };
+  }
+  if (requestStatus === "success") {
+    notification = {
+      status: "success",
+      title: "Success!",
+      message: "Message sent successfully!",
+    };
+  }
+  if (requestStatus === "error") {
+    notification = {
+      status: "error",
+      title: "Error!",
+      message: requestError,
+    };
+  }
+
+  useEffect(() => {
+    if (requestStatus !== "pending") {
+      const timer = setTimeout(() => {
+        setRequestStatus(null);
+        setRequestError(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [requestStatus]);
 
   return (
     <section className={classes.contact}>
@@ -68,6 +114,13 @@ const ContactForm = () => {
           <button>Send Message</button>
         </div>
       </form>
+      {notification && (
+        <Notification
+          status={notification.status}
+          title={notification.title}
+          message={notification.message}
+        />
+      )}
     </section>
   );
 };
