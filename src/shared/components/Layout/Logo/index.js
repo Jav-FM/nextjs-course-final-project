@@ -1,7 +1,7 @@
-import classes from "./Logo.module.css";
+import { Heading } from "@chakra-ui/react";
 
 const MainNavigation = () => {
-  return <div className={classes.logo}>Jav´s Next.JS Blog</div>;
+  return <Heading color={"gray.100"}>Jav´s Next.JS Blog</Heading>;
 };
 
 export default MainNavigation;

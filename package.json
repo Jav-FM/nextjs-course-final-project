@@ -6,12 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tt-main": "npx token-transformer tokens.json tokens/main.json main",
+    "tt-main-dark": "npx token-transformer tokens.json tokens/main-dark.json main-dark",
+    "build-transform": "npm run tt-main && npm run tt-main-dark",
+    "prebuild": "npm run build-transform && npm run build:sd"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@next/font": "13.1.5",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",
+    "framer-motion": "^8.5.4",
     "gray-matter": "^4.0.3",
     "mongodb": "^4.13.0",
     "next": "13.1.5",
@@ -19,5 +27,8 @@
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.5",
     "react-syntax-highlighter": "^15.5.0"
+  },
+  "devDependencies": {
+    "token-transformer": "^0.0.29"
   }
 }

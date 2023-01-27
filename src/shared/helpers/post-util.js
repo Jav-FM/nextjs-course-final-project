@@ -11,7 +11,6 @@ const getPostsFiles = () => {
 const getPostData = (fileName) => {
   const filePath = path.join(postsDirectory, fileName);
   const fileContent = fs.readFileSync(filePath, "utf-8");
-  console.log(fileContent);
   const { data, content } = matter(fileContent);
   const postSlug = fileName.replace(/\.md$/, "");
   const postData = {

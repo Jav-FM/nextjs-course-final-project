@@ -1,19 +1,21 @@
-import Head from "next/head";
-import { Fragment } from "react";
 import AllPosts from "./AllPosts";
+import PostGrid from "../../../shared/components/posts/PostsGrid";
+import { Box, Heading } from "@chakra-ui/react";
 
 const AllPostsPage = ({ posts }) => {
   return (
-    <Fragment>
-      <Head>
-        <title>All Posts</title>
-        <meta
-          name="description"
-          content="A list of all programming-related tutorials and posts!"
-        />
-      </Head>
-      <AllPosts posts={posts} />
-    </Fragment>
+    <Box width="90%" maxWidth="80rem" margin="2rem auto">
+      <Heading
+        as="h2"
+        size="3xl"
+        textAlign="center"
+        marginBottom={5}
+        color="gray.600"
+      >
+        All Posts
+      </Heading>
+      <PostGrid posts={posts} />
+    </Box>
   );
 };
 

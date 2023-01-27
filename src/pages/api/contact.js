@@ -15,7 +15,6 @@ const insertDocument = async (client, collection, document) => {
   const db = client.db(dbName);
   const thisCollection = db.collection(collection);
   const insertDocumentResult = await thisCollection.insertOne(document);
-  console.log("inserted document:", insertDocumentResult);
   return insertDocumentResult;
 };
 

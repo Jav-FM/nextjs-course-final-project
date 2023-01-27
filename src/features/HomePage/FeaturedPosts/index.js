@@ -1,12 +1,20 @@
+import { Box, Heading } from "@chakra-ui/react";
 import PostGrid from "../../../shared/components/posts/PostsGrid";
-import classes from "./FeaturedPosts.module.css";
 
 const FeaturedPosts = ({ posts }) => {
   return (
-    <section className={classes.latest}>
-      <h2>Featured Posts</h2>
+    <Box width="90%" maxWidth="80rem" margin="2rem auto">
+      <Heading
+        as="h2"
+        size="3xl"
+        textAlign="center"
+        marginBottom={5}
+        color="gray.600"
+      >
+        Featured Posts
+      </Heading>
       <PostGrid posts={posts} />
-    </section>
+    </Box>
   );
 };
 

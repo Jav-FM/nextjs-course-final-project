@@ -1,24 +1,34 @@
 import Link from "next/link";
 import Logo from "../Logo";
-import classes from "./MainNavigation.module.css";
+import { Flex, Text } from "@chakra-ui/react";
 
 const MainNavigation = () => {
   return (
-    <header className={classes.header}>
+    <Flex
+      width={"100%"}
+      height="6rem"
+      backgroundColor={"gray.600"}
+      justifyContent="space-between"
+      alignItems="center"
+      paddingX="10%"
+    >
       <Link href="/">
         <Logo />
       </Link>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/posts">Posts</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+      <Flex>
+        <Link href="/posts">
+          <Text fontSize={["s", "s", "xl"]} marginX={4} color={"gray.100"}>
+            Posts
+          </Text>
+        </Link>
+
+        <Link href="/contact">
+          <Text fontSize={["s", "s", "xl"]} marginX={4} color={"gray.100"}>
+            Contact
+          </Text>
+        </Link>
+      </Flex>
+    </Flex>
   );
 };
 
