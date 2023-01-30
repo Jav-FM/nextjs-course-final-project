@@ -1,4 +1,3 @@
-import AllPosts from "./AllPosts";
 import PostGrid from "../../../shared/components/posts/PostsGrid";
 import { Box, Heading } from "@chakra-ui/react";
 

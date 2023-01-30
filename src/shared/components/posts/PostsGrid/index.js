@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
 import PostCard from "../PostCard";
-import classes from "./PostsGrid.module.css";
 
 const PostGrid = ({ posts }) => {
   return (

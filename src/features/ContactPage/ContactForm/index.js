@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import classes from "./ContactForm.module.css";
 import Notification from "../../../shared/components/Notification";
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Textarea,
+  Button,
+} from "@chakra-ui/react";
 
 const ContactForm = () => {
   const [email, setEmail] = useState("");
@@ -75,44 +84,63 @@ const ContactForm = () => {
   }, [requestStatus]);
 
   return (
-    <section className={classes.contact}>
-      <h1>How can I help you?</h1>
-      <form className={classes.form} onSubmit={sendMessageHandler}>
-        <div className={classes.controls}>
-          <div className={classes.control}>
-            <label htmlFor="email">Your Email</label>
-            <input
-              type="email"
-              id="email"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </div>
-          <div className={classes.control}>
-            <label htmlFor="name">Your Name</label>
-            <input
-              type="text"
-              id="name"
-              required
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </div>
-        </div>
-        <div className={classes.control}>
-          <label htmlFor="message">Your Message</label>
-          <textarea
-            id="message"
-            required
-            rows="5"
-            value={message}
-            onChange={(event) => setMessage(event.target.value)}
-          />
-        </div>
-        <div className={classes.actions}>
-          <button>Send Message</button>
-        </div>
+    <Box
+      marginY="4"
+      marginX="auto"
+      borderRadius="6px"
+      backgroundColor="gray.200"
+      width="90%"
+      maxWidth="50rem"
+      padding="10"
+      boxShadow="0 1px 4px rgba(0, 0, 0, 0.2)"
+    >
+      <Heading
+        as="h1"
+        size={["xl", "3xl"]}
+        marginY="2"
+        textAlign={["left", "center"]}
+        mb={8}
+      >
+        How can I help you?
+      </Heading>
+      <form onSubmit={sendMessageHandler}>
+        <Flex columnGap="1rem" flexWrap="wrap">
+          <Box flex="1" minWidth="10rem">
+            <FormControl isRequired>
+              <FormLabel>Your Email</FormLabel>
+              <Input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </FormControl>
+          </Box>
+          <Box flex="1" minWidth="10rem">
+            <FormControl isRequired>
+              <FormLabel>Your Name</FormLabel>
+              <Input
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </FormControl>
+          </Box>
+        </Flex>
+        <Box flex="1" minWidth="10rem">
+          <FormControl isRequired>
+            <FormLabel>Your Message</FormLabel>
+            <Textarea
+              rows="6"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+            ></Textarea>
+          </FormControl>
+        </Box>
+        <Box textAlign="right">
+          <Button mt={6} isLoading={requestStatus === "pending"} type="submit">
+            Send Message
+          </Button>
+        </Box>
       </form>
       {notification && (
         <Notification
@@ -121,7 +149,7 @@ const ContactForm = () => {
           message={notification.message}
         />
       )}
-    </section>
+    </Box>
   );
 };
 
